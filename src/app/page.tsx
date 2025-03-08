@@ -1,30 +1,61 @@
-// pages/dashboard.js
-import { Container, Typography, Card, CardContent } from '@mui/material';
+import { Container, Typography, Button, Grid, Card, CardContent } from '@mui/material';
+import SpaceMap from '../app/components/SpaceMap/page';
+import DestinationCard from '../app/components/DestinationCard/page';
 
-export default function Dashboard() {
+const destinations = [
+  {
+    name: 'Lunar Hotel',
+    description: 'Stay in luxury on the Moon.',
+    hotels: ['Orion Suites', 'Zero-Gravity Lounge'],
+    activities: ['Moonwalking', 'Crater Exploration'],
+  },
+  {
+    name: 'Mars Colony',
+    description: 'Experience life on the Red Planet.',
+    hotels: ['Red Dust Inn', 'Martian Oasis'],
+    activities: ['Rover Rides', 'Dust Storms Surfing'],
+  },
+];
+
+// Add this inside the Container:
+{destinations.map((destination, index) => (
+  <DestinationCard key={index} destination={destination} />
+))}
+
+export default function Home() {
   return (
-    <Container>
-      <Typography variant="h3" align="center" gutterBottom>
-        Your Space Travel Dashboard
-      </Typography>
+    <div style={{ position: 'relative', overflow: 'hidden', minHeight: '100vh' }}>
+      {/* Video Background */}
+      <video
+        autoPlay
+        loop
+        muted
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          zIndex: -1,
+        }}
+      >
+        <source src="/space.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
 
-      {/* Upcoming Trips */}
-      <Card style={{ marginTop: '20px' }}>
-        <CardContent>
-          <Typography variant="h5">Upcoming Trip: Lunar Hotel</Typography>
-          <Typography variant="body1">Departure: December 25, 2023</Typography>
-          <Typography variant="body1">Countdown: 45 days, 12 hours, 30 minutes</Typography>
-        </CardContent>
-      </Card>
+      {/* Content */}
+      <Container style={{ position: 'relative', zIndex: 1, color: 'white', paddingTop: '100px' }}>
+        <Typography variant="h2" align="center" gutterBottom>
+          Dubai to the Stars 🚀
+        </Typography>
+        <Typography variant="h5" align="center" gutterBottom>
+          Book your space travel experience today!
+        </Typography>
 
-      {/* AI Travel Tips */}
-      <Card style={{ marginTop: '20px' }}>
-        <CardContent>
-          <Typography variant="h5">AI Travel Tips</Typography>
-          <Typography variant="body1">- Pack light for zero-gravity.</Typography>
-          <Typography variant="body1">- Stay hydrated in space.</Typography>
-        </CardContent>
-      </Card>
-    </Container>
+        {/* Add other components here */}
+        <SpaceMap />
+      </Container>
+    </div>
   );
 }
